@@ -1,0 +1,48 @@
+{# @var field \thekitchenagency\craftmapboxfield\fields\MapboxMapField #}
+
+{% import '_includes/forms.twig' as forms %}
+
+{{ forms.lightswitchField({
+    label: 'Enable Address Search' | t('mapbox-field'),
+    instructions: 'Display an autocomplete address geocoder input for users.' | t('mapbox-field'),
+    id: 'allowAddressSearch',
+    name: 'allowAddressSearch',
+    on: field.allowAddressSearch,
+    errors: field.getErrors('allowAddressSearch'),
+}) }}
+
+{{ forms.lightswitchField({
+    label: 'Allow Main Marker Drag' | t('mapbox-field'),
+    instructions: 'Let users drag and drop the primary marker to manually update coordinates.' | t('mapbox-field'),
+    id: 'allowMarkerDrag',
+    name: 'allowMarkerDrag',
+    on: field.allowMarkerDrag,
+    errors: field.getErrors('allowMarkerDrag'),
+}) }}
+
+{{ forms.lightswitchField({
+    label: 'Enable Multiple Markers' | t('mapbox-field'),
+    instructions: 'Allow users to add and manage supplementary markers on the map.' | t('mapbox-field'),
+    id: 'allowMultipleMarkers',
+    name: 'allowMultipleMarkers',
+    on: field.allowMultipleMarkers,
+    errors: field.getErrors('allowMultipleMarkers'),
+}) }}
+
+{{ forms.selectField({
+    label: 'Map Style Override' | t('mapbox-field'),
+    instructions: 'Optionally override the global default map style for this field instance.' | t('mapbox-field'),
+    id: 'mapStyle',
+    name: 'mapStyle',
+    options: [
+        { label: 'Use Global Default' | t('mapbox-field'), value: '' },
+        { label: 'Streets' | t('mapbox-field'), value: 'mapbox://styles/mapbox/streets-v12' },
+        { label: 'Outdoors' | t('mapbox-field'), value: 'mapbox://styles/mapbox/outdoors-v12' },
+        { label: 'Light' | t('mapbox-field'), value: 'mapbox://styles/mapbox/light-v11' },
+        { label: 'Dark' | t('mapbox-field'), value: 'mapbox://styles/mapbox/dark-v11' },
+        { label: 'Satellite' | t('mapbox-field'), value: 'mapbox://styles/mapbox/satellite-v9' },
+        { label: 'Satellite Streets' | t('mapbox-field'), value: 'mapbox://styles/mapbox/satellite-streets-v12' }
+    ],
+    value: field.mapStyle,
+    errors: field.getErrors('mapStyle'),
+}) }}

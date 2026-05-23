@@ -1,0 +1,58 @@
+{
+  "name": "thekitchen-agency/craft-mapbox-field",
+  "type": "craft-plugin",
+  "description": "A premium Mapbox custom field for Craft CMS 5 with autocomplete geocoding, drag-and-drop positioning, and multi-marker panels.",
+  "keywords": [
+    "craft",
+    "craft-cms",
+    "craft-plugin",
+    "mapbox",
+    "map",
+    "geocoding",
+    "markers"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/thekitchen-agency/craft-mapbox-field",
+  "support": {
+    "email": "tech@thekitchen.agency",
+    "issues": "https://github.com/thekitchen-agency/craft-mapbox-field/issues"
+  },
+  "require": {
+    "php": ">=8.3",
+    "craftcms/cms": "^5.10.0"
+  },
+  "require-dev": {
+    "craftcms/ecs": "dev-main",
+    "craftcms/phpstan": "dev-main"
+  },
+  "autoload": {
+    "psr-4": {
+      "thekitchenagency\\craftmapboxfield\\": "src/"
+    }
+  },
+  "extra": {
+    "handle": "mapbox-field",
+    "name": "Mapbox Field",
+    "developer": "thekitchen.agency",
+    "developerUrl": "https://thekitchen.agency",
+    "developerEmail": "tech@thekitchen.agency",
+    "documentationUrl": "https://github.com/thekitchen-agency/craft-mapbox-field/blob/main/README.md",
+    "changelogUrl": "https://raw.githubusercontent.com/thekitchen-agency/craft-mapbox-field/main/CHANGELOG.md",
+    "class": "thekitchenagency\\craftmapboxfield\\MapboxField"
+  },
+  "scripts": {
+    "check-cs": "ecs check --ansi",
+    "fix-cs": "ecs check --ansi --fix",
+    "phpstan": "phpstan --memory-limit=1G"
+  },
+  "config": {
+    "sort-packages": true,
+    "platform": {
+      "php": "8.2"
+    },
+    "allow-plugins": {
+      "yiisoft/yii2-composer": true,
+      "craftcms/plugin-installer": true
+    }
+  }
+}

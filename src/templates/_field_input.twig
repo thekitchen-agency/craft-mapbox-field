@@ -1,0 +1,87 @@
+{# @var value \thekitchenagency\craftmapboxfield\models\MapboxFieldValue #}
+{# @var field \thekitchenagency\craftmapboxfield\fields\MapboxMapField #}
+{# @var mapboxToken string #}
+{# @var defaultStyle string #}
+
+{% import '_includes/forms.twig' as forms %}
+
+{% set id = name | replace({ '[': '-', ']': '-' }) ~ '-mapbox-field-wrapper' %}
+
+<div id="{{ id }}" class="mapbox-field-wrapper {{ field.allowMultipleMarkers ? 'has-sidebar' : 'no-sidebar' }}">
+    {# Hidden input to store serialized JSON value #}
+    <input type="hidden" name="{{ name }}" class="mapbox-field-value-input" value="{{ value.toArray() | json_encode | escape('html_attr') }}">
+
+    {# Map layout container #}
+    <div class="mapbox-field-layout">
+        {# Map & Search Column #}
+        <div class="mapbox-field-map-col">
+            {% if field.allowAddressSearch %}
+                <div class="mapbox-field-search-container">
+                    <div class="mapbox-field-search-input-wrapper">
+                        <input type="text" class="mapbox-field-search-input text fullwidth" placeholder="{{ 'Search address or place...' | t('mapbox-field') }}" autocomplete="off">
+                        <span class="spinner hidden"></span>
+                        <button type="button" class="mapbox-field-clear-search hidden">&times;</button>
+                    </div>
+                    <div class="mapbox-field-search-results hidden"></div>
+                </div>
+            {% endif %}
+
+            <div class="mapbox-field-map" style="height: 450px; min-height: 400px; width: 100%;"></div>
+            
+            <div class="mapbox-field-map-footer">
+                <span class="mapbox-field-coords-display">
+                    <strong>{{ 'Primary Coords:' | t('mapbox-field') }}</strong> 
+                    <span class="lat-val">{{ value.lat ?: 'N/A' }}</span>, 
+                    <span class="lng-val">{{ value.lng ?: 'N/A' }}</span>
+                </span>
+                <span class="mapbox-field-address-display">
+                    <span class="address-val">{{ value.address ?: 'No address selected' | t('mapbox-field') }}</span>
+                </span>
+            </div>
+        </div>
+
+        {# Sidebar Column (for multi-marker or additional details) #}
+        {% if field.allowMultipleMarkers %}
+            <div class="mapbox-field-sidebar-col">
+                <div class="mapbox-field-sidebar-header">
+                    <h3>{{ 'Supplementary Markers' | t('mapbox-field') }}</h3>
+                    <button type="button" class="btn dashed add-marker-btn" icon="plus">{{ 'Add Marker' | t('mapbox-field') }}</button>
+                </div>
+
+                <div class="mapbox-field-markers-list-wrapper">
+                    <div class="mapbox-field-markers-empty-state {{ value.markers|length > 0 ? 'hidden' : '' }}">
+                        <p>{{ 'No supplementary markers added yet.' | t('mapbox-field') }}</p>
+                    </div>
+                    <div class="mapbox-field-markers-list">
+                        {# Dynamic markers will be rendered here by JS #}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% js %}
+(function() {
+    // Ensure Mapbox GL and our script are fully loaded
+    var initField = function() {
+        if (typeof MapboxFieldInput === 'undefined') {
+            setTimeout(initField, 50);
+            return;
+        }
+        new MapboxFieldInput({
+            id: '{{ view.namespaceInputId(id) }}',
+            name: '{{ view.namespaceInputName(name) }}',
+            token: '{{ mapboxToken }}',
+            defaultStyle: '{{ defaultStyle }}',
+            allowMultipleMarkers: {{ field.allowMultipleMarkers ? 'true' : 'false' }},
+            allowAddressSearch: {{ field.allowAddressSearch ? 'true' : 'false' }},
+            allowMarkerDrag: {{ field.allowMarkerDrag ? 'true' : 'false' }},
+            defaultLatitude: {{ value.lat ?: 46.8182 }},
+            defaultLongitude: {{ value.lng ?: 8.2275 }},
+            defaultZoom: {{ value.zoom ?: 8 }}
+        });
+    };
+    initField();
+})();
+{% endjs %}

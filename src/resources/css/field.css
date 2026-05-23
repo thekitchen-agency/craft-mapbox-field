@@ -1,0 +1,370 @@
+/* Mapbox Field Custom CSS */
+
+.mapbox-field-wrapper {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 15px 0;
+    box-sizing: border-box;
+}
+
+.mapbox-field-wrapper *, 
+.mapbox-field-wrapper *::before, 
+.mapbox-field-wrapper *::after {
+    box-sizing: inherit;
+}
+
+.mapbox-field-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Map Column */
+.mapbox-field-map-col {
+    flex: 1 1 550px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Search Bar geocoder */
+.mapbox-field-search-container {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    z-index: 10;
+}
+
+.mapbox-field-search-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.2s ease;
+}
+
+.mapbox-field-search-input-wrapper:focus-within {
+    border-color: #3b82f6;
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.15);
+    background: #ffffff;
+}
+
+.mapbox-field-search-input.text {
+    border: none !important;
+    background: transparent !important;
+    padding: 10px 36px 10px 14px !important;
+    height: 40px !important;
+    font-size: 14px !important;
+    box-shadow: none !important;
+    outline: none !important;
+    margin: 0 !important;
+}
+
+.mapbox-field-clear-search {
+    position: absolute;
+    right: 12px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #94a3b8;
+    cursor: pointer;
+    padding: 4px;
+    line-height: 1;
+}
+
+.mapbox-field-clear-search:hover {
+    color: #64748b;
+}
+
+.mapbox-field-search-results {
+    position: absolute;
+    top: 46px;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    max-height: 250px;
+    overflow-y: auto;
+    z-index: 11;
+}
+
+.mapbox-field-search-result-item {
+    padding: 10px 14px;
+    cursor: pointer;
+    font-size: 13px;
+    color: #334155;
+    border-bottom: 1px solid #f1f5f9;
+    transition: background 0.15s ease;
+}
+
+.mapbox-field-search-result-item:last-child {
+    border-bottom: none;
+}
+
+.mapbox-field-search-result-item:hover {
+    background: #f1f5f9;
+    color: #0f172a;
+}
+
+/* Map Frame */
+.mapbox-field-map {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.mapbox-field-map-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-top: none;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: #64748b;
+    gap: 8px;
+}
+
+.mapbox-field-coords-display {
+    font-family: monospace;
+}
+
+.mapbox-field-address-display {
+    max-width: 60%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    color: #475569;
+}
+
+/* Sidebar Column */
+.mapbox-field-sidebar-col {
+    flex: 1 1 300px;
+    display: flex;
+    flex-direction: column;
+    min-height: 400px;
+}
+
+.mapbox-field-sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 10px;
+}
+
+.mapbox-field-sidebar-header h3 {
+    margin: 0 !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #1e293b !important;
+}
+
+.mapbox-field-markers-list-wrapper {
+    flex-grow: 1;
+    overflow-y: auto;
+    max-height: 400px;
+    padding-right: 4px;
+}
+
+.mapbox-field-markers-empty-state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
+    border: 2px dashed #cbd5e1;
+    border-radius: 8px;
+    color: #94a3b8;
+    font-size: 13px;
+    text-align: center;
+    padding: 20px;
+}
+
+.mapbox-field-markers-empty-state.hidden {
+    display: none;
+}
+
+.mapbox-field-markers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Marker Card */
+.mapbox-field-marker-card {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-left: 4px solid #3b82f6;
+    border-radius: 6px;
+    padding: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.mapbox-field-marker-card:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border-color: #94a3b8;
+}
+
+.mapbox-field-marker-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 6px;
+}
+
+.mapbox-field-marker-card-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+}
+
+.mapbox-field-marker-card-actions {
+    display: flex;
+    gap: 6px;
+}
+
+.mapbox-field-marker-card-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 2px 4px;
+    font-size: 12px;
+    color: #94a3b8;
+    border-radius: 4px;
+    transition: all 0.15s ease;
+}
+
+.mapbox-field-marker-card-btn:hover {
+    background: #f1f5f9;
+}
+
+.mapbox-field-marker-card-btn.locate-btn:hover {
+    color: #10b981;
+}
+
+.mapbox-field-marker-card-btn.delete-btn:hover {
+    color: #ef4444;
+}
+
+.mapbox-field-marker-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.mapbox-field-marker-input-row {
+    display: flex;
+    gap: 8px;
+}
+
+.mapbox-field-marker-input-row input,
+.mapbox-field-marker-input-row select {
+    font-size: 12px !important;
+    padding: 6px 8px !important;
+    height: auto !important;
+    min-height: auto !important;
+}
+
+.mapbox-field-marker-input-row .col-half {
+    flex: 1;
+}
+
+.mapbox-field-marker-coords-row {
+    display: flex;
+    gap: 8px;
+    font-family: monospace;
+    font-size: 10px;
+    color: #64748b;
+}
+
+/* Color Picker UI */
+.mapbox-field-color-picker {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 4px;
+}
+
+.mapbox-field-color-label {
+    font-size: 11px;
+    color: #64748b;
+    margin-right: 4px;
+}
+
+.mapbox-field-color-swatch {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 1px solid rgba(0,0,0,0.1);
+    position: relative;
+    transition: transform 0.15s ease;
+}
+
+.mapbox-field-color-swatch:hover {
+    transform: scale(1.2);
+}
+
+.mapbox-field-color-swatch.active {
+    box-shadow: 0 0 0 2px #ffffff, 0 0 0 3px #3b82f6;
+    transform: scale(1.15);
+}
+
+/* Custom Marker SVGs on the Map */
+.mapboxgl-marker.mapbox-custom-marker svg {
+    transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.mapboxgl-marker.mapbox-custom-marker:hover svg {
+    transform: scale(1.2) translateY(-2px);
+}
+
+.mapboxgl-marker.mapbox-custom-marker:hover {
+    z-index: 1000;
+}
+
+/* CSS Scrollbar optimization for markers list */
+.mapbox-field-markers-list-wrapper::-webkit-scrollbar {
+    width: 6px;
+}
+
+.mapbox-field-markers-list-wrapper::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.mapbox-field-markers-list-wrapper::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 10px;
+}
+
+.mapbox-field-markers-list-wrapper::-webkit-scrollbar-thumb:hover {
+    background-color: #94a3b8;
+}
+
+.hidden {
+    display: none !important;
+}

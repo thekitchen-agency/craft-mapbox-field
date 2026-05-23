@@ -1,0 +1,76 @@
+{# @var plugin \thekitchenagency\craftmapboxfield\MapboxField #}
+{# @var settings \thekitchenagency\craftmapboxfield\models\Settings #}
+
+{% import '_includes/forms.twig' as forms %}
+
+<h2>Mapbox Configuration</h2>
+
+{{ forms.textField({
+    label: 'Mapbox Access Token' | t('mapbox-field'),
+    instructions: 'Enter your Mapbox public API access token.' | t('mapbox-field'),
+    id: 'mapboxAccessToken',
+    name: 'mapboxAccessToken',
+    value: settings.mapboxAccessToken,
+    errors: settings.getErrors('mapboxAccessToken'),
+    required: true,
+}) }}
+
+{{ forms.selectField({
+    label: 'Default Map Style' | t('mapbox-field'),
+    instructions: 'Choose the default styling of the map.' | t('mapbox-field'),
+    id: 'defaultStyle',
+    name: 'defaultStyle',
+    options: [
+        { label: 'Streets' | t('mapbox-field'), value: 'mapbox://styles/mapbox/streets-v12' },
+        { label: 'Outdoors' | t('mapbox-field'), value: 'mapbox://styles/mapbox/outdoors-v12' },
+        { label: 'Light' | t('mapbox-field'), value: 'mapbox://styles/mapbox/light-v11' },
+        { label: 'Dark' | t('mapbox-field'), value: 'mapbox://styles/mapbox/dark-v11' },
+        { label: 'Satellite' | t('mapbox-field'), value: 'mapbox://styles/mapbox/satellite-v9' },
+        { label: 'Satellite Streets' | t('mapbox-field'), value: 'mapbox://styles/mapbox/satellite-streets-v12' }
+    ],
+    value: settings.defaultStyle,
+    errors: settings.getErrors('defaultStyle'),
+}) }}
+
+<hr>
+
+<h2>Default Location & Zoom</h2>
+
+<div class="flex">
+    <div class="col-4">
+        {{ forms.textField({
+            label: 'Default Latitude' | t('mapbox-field'),
+            instructions: 'Center latitude of the map if not specified.' | t('mapbox-field'),
+            id: 'defaultLatitude',
+            name: 'defaultLatitude',
+            type: 'number',
+            step: 'any',
+            value: settings.defaultLatitude,
+            errors: settings.getErrors('defaultLatitude'),
+        }) }}
+    </div>
+    <div class="col-4">
+        {{ forms.textField({
+            label: 'Default Longitude' | t('mapbox-field'),
+            instructions: 'Center longitude of the map if not specified.' | t('mapbox-field'),
+            id: 'defaultLongitude',
+            name: 'defaultLongitude',
+            type: 'number',
+            step: 'any',
+            value: settings.defaultLongitude,
+            errors: settings.getErrors('defaultLongitude'),
+        }) }}
+    </div>
+    <div class="col-4">
+        {{ forms.textField({
+            label: 'Default Zoom' | t('mapbox-field'),
+            instructions: 'Initial zoom level (0-22).' | t('mapbox-field'),
+            id: 'defaultZoom',
+            name: 'defaultZoom',
+            type: 'number',
+            step: 'any',
+            value: settings.defaultZoom,
+            errors: settings.getErrors('defaultZoom'),
+        }) }}
+    </div>
+</div>
